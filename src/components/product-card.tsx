@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Star, Heart, ShoppingCart } from 'lucide-react';
 import { Button } from './ui/button';
+import { useCart } from '../context/cart-context';
+import { useWishlist } from '../context/wishlist-context';
 
 interface ProductCardProps {
   id: number;
@@ -27,6 +29,40 @@ const ProductCard = ({
   isNew,
   discount
 }: ProductCardProps) => {
+  const { addToCart } = useCart();
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+
+  const inWishlist = isInWishlist(id);
+
+  const handleAddToCart = () => {
+    if (inStock) {
+      addToCart({
+        id,
+        name,
+        price,
+        image,
+        inStock
+      });
+    }
+  };
+
+  const handleToggleWishlist = () => {
+    if (inWishlist) {
+      removeFromWishlist(id);
+    } else {
+      addToWishlist({
+        id,
+        name,
+        price,
+        originalPrice,
+        rating,
+        reviews,
+        image,
+        inStock,
+        discount
+      });
+    }
+  };
   return (
     <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow overflow-hidden group">
       <div className="relative overflow-hidden">
@@ -53,11 +89,15 @@ const ProductCard = ({
           </div>
         )}
         <Button
-          className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md hover:bg-red-50 transition opacity-0 group-hover:opacity-100"
+          onClick={handleToggleWishlist}
+          className={`absolute top-2 right-2 bg-white p-2 rounded-full shadow-md hover:bg-red-50 transition opacity-0 group-hover:opacity-100 ${inWishlist ? 'opacity-100' : ''}`}
           size="normal"
           variant="normal"
         >
-          <Heart size={18} className="text-gray-700" />
+          <Heart
+            size={18}
+            className={inWishlist ? 'text-red-500 fill-red-500' : 'text-gray-700'}
+          />
         </Button>
       </div>
 
@@ -99,6 +139,7 @@ const ProductCard = ({
             View Details
           </Link>
           <Button
+            onClick={handleAddToCart}
             variant="normal"
             size="normal"
             disabled={!inStock}

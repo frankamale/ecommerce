@@ -5,7 +5,11 @@ import CategoryDetail from "../views/category-detail"
 import Contact from "../views/contact"
 import Login from "../auth/login"
 import Register from "../auth/register"
-import Legal from "../views/legal"
+import Legal from "../auth/legal"
+import Deals from "../views/deals"
+import NewArrivals from "../views/new-arrivals"
+import Cart from "../views/cart"
+import Wishlist from "../views/wishlist"
 
 const GuestRoutes = () => {
     return(
@@ -17,6 +21,10 @@ const GuestRoutes = () => {
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register/>} />
             <Route path="/legal" element={<Legal/>} />
+            <Route path="/deals" element={<Deals/>} />
+            <Route path="/new-arrivals" element={<NewArrivals/>} />
+            <Route path="/cart" element={<Cart/>} />
+            <Route path="/wishlist" element={<Wishlist/>} />
         </Routes>
     )
 }

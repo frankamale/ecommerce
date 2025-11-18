@@ -13,11 +13,17 @@ import {
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { categories } from '../data/products';
+import { useCart } from '../context/cart-context';
+import { useWishlist } from '../context/wishlist-context';
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const cartItemCount = 3;
+  const { getCartCount } = useCart();
+  const { getWishlistCount } = useWishlist();
+
+  const cartItemCount = getCartCount();
+  const wishlistItemCount = getWishlistCount();
 
   return (
     <nav className="w-full bg-white shadow-md sticky top-0 z-50 ">
@@ -53,9 +59,11 @@ const NavBar = () => {
             {/* Wishlist */}
             <Link to="/wishlist" className="relative hover:text-blue-600 transition">
               <Heart size={24} />
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                2
-              </span>
+              {wishlistItemCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {wishlistItemCount}
+                </span>
+              )}
             </Link>
 
             {/* Cart */}

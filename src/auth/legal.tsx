@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import NavBar from '../components/nav-bar';
+// import NavBar from '../components/nav-bar';
 import Footer from '../components/footer';
 import { Shield, FileText, ScrollText } from 'lucide-react';
 
@@ -8,7 +8,6 @@ const Legal = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Scroll to section based on hash
     if (location.hash) {
       const id = location.hash.replace('#', '');
       const element = document.getElementById(id);
@@ -20,7 +19,7 @@ const Legal = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <NavBar />
+      {/* <NavBar /> */}
 
       {/* Breadcrumb */}
       <div className="bg-white border-b px-4 md:px-10 lg:px-20">
@@ -47,7 +46,7 @@ const Legal = () => {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 py-12 px-4 md:px-10 lg:px-20">
+      <div className="container mx-auto px-4 py-12  md:px-10 lg:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Sidebar Navigation */}
           <aside className="lg:col-span-1">
