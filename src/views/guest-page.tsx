@@ -7,21 +7,29 @@ import FeaturedProductsSection from '../components/featured-products-section';
 import CTASection from '../components/cta-section';
 import NewsletterSection from '../components/newsletter-section';
 import { ShoppingBag, Truck, Shield, CreditCard } from 'lucide-react';
+import { getFeaturedProducts, categories as allCategories } from '../data/products';
 
 const GuestPage = () => {
-  const featuredCategories = [
-    { name: 'Electronics', image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=400', link: '/categories/electronics' },
-    { name: 'Fashion', image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=400', link: '/categories/fashion' },
-    { name: 'Home & Living', image: 'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=400', link: '/categories/home' },
-    { name: 'Beauty', image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400', link: '/categories/beauty' },
-  ];
+  // Get featured categories from data file (first 4)
+  const featuredCategories = allCategories.slice(0, 4).map(cat => ({
+    name: cat.name,
+    image: cat.image,
+    link: `/categories/${cat.slug}`
+  }));
 
-  const featuredProducts = [
-    { id: 1, name: 'Wireless Headphones', price: 320000, rating: 4.5, reviews: 128, image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400', inStock: true, discount: 29 },
-    { id: 2, name: 'Smart Watch', price: 750000, rating: 4.8, reviews: 256, image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400', inStock: true, isNew: true },
-    { id: 3, name: 'Laptop Bag', price: 185000, rating: 4.3, reviews: 89, image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400', inStock: true, originalPrice: 220000, discount: 16 },
-    { id: 4, name: 'Coffee Maker', price: 295000, rating: 4.6, reviews: 142, image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400', inStock: true },
-  ];
+  // Get featured products from data file and map to component format
+  const featuredProducts = getFeaturedProducts().slice(0, 4).map(p => ({
+    id: p.id,
+    name: p.name,
+    price: p.price,
+    originalPrice: p.originalPrice,
+    rating: p.rating,
+    reviews: p.reviews,
+    image: p.images[0],
+    inStock: p.inStock,
+    isNew: p.isNew,
+    discount: p.discount
+  }));
 
   const benefits = [
     { icon: Truck, title: 'Free Delivery', description: 'On orders over UGX 200,000' },

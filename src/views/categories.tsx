@@ -4,116 +4,32 @@ import Footer from '../components/footer';
 import CategoryCard from '../components/category-card';
 import ProductCard from '../components/product-card';
 import { ArrowRight } from 'lucide-react';
+import { getFeaturedProducts, categories as allCategories, products as allProducts } from '../data/products';
 
 const Categories = () => {
-  const categories = [
-    {
-      name: 'Electronics',
-      image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=600',
-      link: '/categories/electronics',
-      productCount: 245,
-      description: 'Discover the latest gadgets, phones, laptops, and electronic accessories'
-    },
-    {
-      name: 'Fashion',
-      image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=600',
-      link: '/categories/fashion',
-      productCount: 532,
-      description: 'Trendy clothing, shoes, and accessories for men and women'
-    },
-    {
-      name: 'Home & Living',
-      image: 'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=600',
-      link: '/categories/home',
-      productCount: 178,
-      description: 'Furniture, decor, kitchen essentials, and home improvement items'
-    },
-    {
-      name: 'Beauty & Health',
-      image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600',
-      link: '/categories/beauty',
-      productCount: 324,
-      description: 'Cosmetics, skincare, fragrances, and health products'
-    },
-    {
-      name: 'Sports & Fitness',
-      image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600',
-      link: '/categories/sports',
-      productCount: 156,
-      description: 'Exercise equipment, sportswear, and outdoor gear'
-    },
-    {
-      name: 'Books & Stationery',
-      image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600',
-      link: '/categories/books',
-      productCount: 289,
-      description: 'Books, office supplies, and educational materials'
-    },
-    {
-      name: 'Toys & Games',
-      image: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=600',
-      link: '/categories/toys',
-      productCount: 198,
-      description: 'Fun and educational toys for kids of all ages'
-    },
-    {
-      name: 'Automotive',
-      image: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600',
-      link: '/categories/automotive',
-      productCount: 142,
-      description: 'Car accessories, parts, and maintenance products'
-    },
-  ];
+  // Get categories from data file with product counts
+  const categories = allCategories.map(cat => ({
+    name: cat.name,
+    image: cat.image,
+    link: `/categories/${cat.slug}`,
+    productCount: allProducts.filter(p => p.category === cat.slug).length,
+    description: cat.description
+  }));
 
-  const featuredProducts = [
-    {
-      id: 1,
-      name: 'Wireless Bluetooth Headphones',
-      price: 320000,
-      originalPrice: 450000,
-      rating: 4.5,
-      reviews: 128,
-      image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400',
-      category: 'electronics',
-      inStock: true,
-      discount: 29
-    },
-    {
-      id: 2,
-      name: 'Smart Watch Series 6',
-      price: 750000,
-      rating: 4.8,
-      reviews: 256,
-      image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400',
-      category: 'electronics',
-      inStock: true,
-      isNew: true
-    },
-    {
-      id: 3,
-      name: 'Premium Laptop Bag',
-      price: 185000,
-      originalPrice: 220000,
-      rating: 4.3,
-      reviews: 89,
-      image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400',
-      category: 'fashion',
-      inStock: true,
-      discount: 16
-    },
-    {
-      id: 4,
-      name: 'Running Shoes',
-      price: 420000,
-      originalPrice: 550000,
-      rating: 4.7,
-      reviews: 203,
-      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400',
-      category: 'sports',
-      inStock: true,
-      discount: 24
-    },
-  ];
+  // Get featured products from data file
+  const featuredProducts = getFeaturedProducts().slice(0, 4).map(p => ({
+    id: p.id,
+    name: p.name,
+    price: p.price,
+    originalPrice: p.originalPrice,
+    rating: p.rating,
+    reviews: p.reviews,
+    image: p.images[0],
+    category: p.category,
+    inStock: p.inStock,
+    isNew: p.isNew,
+    discount: p.discount
+  }));
 
   return (
     <div className="min-h-screen bg-gray-50">

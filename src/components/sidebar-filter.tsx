@@ -1,4 +1,5 @@
-import { Star, Filter } from 'lucide-react';
+import {  Filter } from 'lucide-react';
+import { Button } from './ui/button';
 
 interface SidebarFilterProps {
   priceRange: number[];
@@ -26,7 +27,8 @@ const SidebarFilter = ({
         <div className="mb-6">
           <h3 className="font-semibold text-gray-900 mb-3">Sub Categories</h3>
           <div className="space-y-2">
-            <button
+            <Button
+            variant={"normal"}
               onClick={() => setSelectedSubCategory?.('all')}
               className={`w-full text-left px-3 py-2 rounded-lg transition ${
                 selectedSubCategory === 'all'
@@ -35,9 +37,10 @@ const SidebarFilter = ({
               }`}
             >
               All
-            </button>
+            </Button>
             {subCategories.map((subCat) => (
-              <button
+              <Button
+              variant={"normal"}
                 key={subCat.id}
                 onClick={() => setSelectedSubCategory?.(subCat.id)}
                 className={`w-full text-left px-3 py-2 rounded-lg transition ${
@@ -50,7 +53,7 @@ const SidebarFilter = ({
                   <span>{subCat.name}</span>
                   <span className="text-sm">({subCat.count})</span>
                 </div>
-              </button>
+              </Button>
             ))}
           </div>
         </div>
@@ -76,33 +79,7 @@ const SidebarFilter = ({
         </div>
       </div>
 
-      {/* Rating Filter */}
-      <div className="mb-6">
-        <h3 className="font-semibold text-gray-900 mb-3">Rating</h3>
-        <div className="space-y-2">
-          {[4, 3, 2, 1].map((rating) => (
-            <button
-              key={rating}
-              className="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 transition flex items-center gap-2"
-            >
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    size={16}
-                    className={
-                      i < rating
-                        ? 'fill-yellow-400 text-yellow-400'
-                        : 'text-gray-300'
-                    }
-                  />
-                ))}
-              </div>
-              <span className="text-sm text-gray-600">& Up</span>
-            </button>
-          ))}
-        </div>
-      </div>
+     
 
       {/* Availability */}
       <div className="mb-6">
@@ -113,9 +90,9 @@ const SidebarFilter = ({
         </label>
       </div>
 
-      <button className="w-full bg-gray-900 text-white py-2 rounded-lg hover:bg-gray-800 transition">
+      <Button className="w-full bg-gray-900 text-white py-2 rounded-lg hover:bg-gray-800 transition">
         Reset Filters
-      </button>
+      </Button>
     </div>
   );
 };

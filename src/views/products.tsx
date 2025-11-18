@@ -5,6 +5,7 @@ import Footer from '../components/footer';
 import ProductCard from '../components/product-card';
 import SidebarFilter from '../components/sidebar-filter';
 import ProductToolbar from '../components/product-toolbar';
+import { products as allProducts, categories as allCategories } from '../data/products';
 
 interface Product {
   id: number;
@@ -25,107 +26,29 @@ const Products = () => {
   const [sortBy, setSortBy] = useState('featured');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [priceRange, setPriceRange] = useState([0, 5000000]);
-  const [showFilters, setShowFilters] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
 
-  // Sample products data
-  const products: Product[] = [
-    {
-      id: 1,
-      name: 'Wireless Bluetooth Headphones',
-      price: 320000,
-      originalPrice: 450000,
-      rating: 4.5,
-      reviews: 128,
-      image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400',
-      category: 'electronics',
-      inStock: true,
-      discount: 29
-    },
-    {
-      id: 2,
-      name: 'Smart Watch Series 6',
-      price: 750000,
-      rating: 4.8,
-      reviews: 256,
-      image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400',
-      category: 'electronics',
-      inStock: true,
-      isNew: true
-    },
-    {
-      id: 3,
-      name: 'Premium Laptop Bag',
-      price: 185000,
-      originalPrice: 220000,
-      rating: 4.3,
-      reviews: 89,
-      image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400',
-      category: 'fashion',
-      inStock: true,
-      discount: 16
-    },
-    {
-      id: 4,
-      name: 'Coffee Maker Machine',
-      price: 295000,
-      rating: 4.6,
-      reviews: 142,
-      image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400',
-      category: 'home',
-      inStock: true
-    },
-    {
-      id: 5,
-      name: 'Running Shoes',
-      price: 420000,
-      originalPrice: 550000,
-      rating: 4.7,
-      reviews: 203,
-      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400',
-      category: 'sports',
-      inStock: true,
-      discount: 24
-    },
-    {
-      id: 6,
-      name: 'Leather Wallet',
-      price: 85000,
-      rating: 4.4,
-      reviews: 67,
-      image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=400',
-      category: 'fashion',
-      inStock: false
-    },
-    {
-      id: 7,
-      name: 'Bluetooth Speaker',
-      price: 280000,
-      rating: 4.5,
-      reviews: 156,
-      image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400',
-      category: 'electronics',
-      inStock: true,
-      isNew: true
-    },
-    {
-      id: 8,
-      name: 'Yoga Mat Premium',
-      price: 95000,
-      rating: 4.2,
-      reviews: 78,
-      image: 'https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400',
-      category: 'sports',
-      inStock: true
-    },
-  ];
+  // Map products from data file to ProductCard format
+  const products: Product[] = allProducts.map(p => ({
+    id: p.id,
+    name: p.name,
+    price: p.price,
+    originalPrice: p.originalPrice,
+    rating: p.rating,
+    reviews: p.reviews,
+    image: p.images[0],
+    category: p.category,
+    inStock: p.inStock,
+    isNew: p.isNew,
+    discount: p.discount
+  }));
 
-  const categories = [
-    { id: 'all', name: 'All Products', count: products.length },
-    { id: 'electronics', name: 'Electronics', count: products.filter(p => p.category === 'electronics').length },
-    { id: 'fashion', name: 'Fashion', count: products.filter(p => p.category === 'fashion').length },
-    { id: 'home', name: 'Home & Living', count: products.filter(p => p.category === 'home').length },
-    { id: 'sports', name: 'Sports', count: products.filter(p => p.category === 'sports').length },
-  ];
+  // Get unique categories with product counts
+  const categories = allCategories.map(cat => ({
+    id: cat.slug,
+    name: cat.name,
+    count: products.filter(p => p.category === cat.slug).length
+  }));
 
   const filteredProducts = products.filter(product => {
     if (selectedCategory !== 'all' && product.category !== selectedCategory) return false;
