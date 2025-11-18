@@ -66,12 +66,12 @@ const ProductInfo = ({
 
       {/* Price */}
       <div className="flex items-center gap-4">
-        <span className="text-4xl font-bold text-blue-600">
+        <span className="text-xl md:text-4xl font-bold text-blue-600">
           UGX {price.toLocaleString()}
         </span>
         {originalPrice && (
           <>
-            <span className="text-2xl text-gray-400 line-through">
+            <span className="text-sm md:text-2xl text-gray-400 line-through">
               UGX {originalPrice.toLocaleString()}
             </span>
             <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">

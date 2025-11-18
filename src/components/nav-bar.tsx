@@ -12,6 +12,7 @@ import {
   Flame
 } from 'lucide-react';
 import { Button } from './ui/button';
+import { categories } from '../data/products';
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -112,16 +113,22 @@ const NavBar = () => {
           All Products
         </Link>
         <div className="relative group">
-          <button className="hover:text-blue-400 font-medium transition">
+          <Link to="/categories" className="hover:text-blue-400 font-medium transition">
             Categories ▾
-          </button>
-          {/* Dropdown Menu */}
-          <div className="absolute hidden group-hover:block bg-white shadow-lg rounded-lg mt-2 py-2 min-w-[200px]">
-            <Link to="/categories/electronics" className="block px-4 py-2 hover:bg-gray-100 text-gray-900">Electronics</Link>
-            <Link to="/categories/fashion" className="block px-4 py-2 hover:bg-gray-100 text-gray-900">Fashion</Link>
-            <Link to="/categories/home" className="block px-4 py-2 hover:bg-gray-100 text-gray-900">Home & Living</Link>
-            <Link to="/categories/beauty" className="block px-4 py-2 hover:bg-gray-100 text-gray-900">Beauty</Link>
-            <Link to="/categories/sports" className="block px-4 py-2 hover:bg-gray-100 text-gray-900">Sports</Link>
+          </Link>
+          {/* Dropdown Menu - Added padding-top to bridge the gap */}
+          <div className="absolute left-0 pt-2 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200">
+            <div className="bg-white shadow-lg rounded-lg py-2 min-w-[200px]">
+              {categories.map((category) => (
+                <Link
+                  key={category.slug}
+                  to={`/categories/${category.slug}`}
+                  className="block px-4 py-2 hover:bg-gray-100 text-gray-900"
+                >
+                  {category.name}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
         <Link to="/deals" className="text-red-400 hover:text-red-300 font-medium transition flex items-center gap-1">
