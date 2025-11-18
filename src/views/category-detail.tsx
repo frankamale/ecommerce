@@ -17,6 +17,9 @@ const CategoryDetail = () => {
 
   // Get category data from data file
   const currentCategory = getCategoryBySlug(categorySlug || 'electronics');
+  if (!currentCategory) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center"><p>Category not found</p></div>;
+  }
 
   // Get products for this category from data file
   const categoryProducts = getProductsByCategory(categorySlug || 'electronics');
@@ -48,7 +51,7 @@ const CategoryDetail = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 ">
       <NavBar />
 
       {/* Breadcrumb */}
