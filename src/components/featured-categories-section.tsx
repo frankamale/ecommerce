@@ -13,7 +13,7 @@ interface FeaturedCategoriesSectionProps {
 
 const FeaturedCategoriesSection = ({ categories }: FeaturedCategoriesSectionProps) => {
   return (
-    <section className="py-16">
+    <section className="py-16 lg:px-20">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold text-gray-900">Shop by Category</h2>

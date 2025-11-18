@@ -27,7 +27,7 @@ const FeaturedProductsSection = ({
   subtitle = 'Check out our most popular items'
 }: FeaturedProductsSectionProps) => {
   return (
-    <section className="py-16 bg-gray-100">
+    <section className=" py-6 md:py-16 bg-gray-100 lg:px-20">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <div>

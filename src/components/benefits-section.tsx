@@ -13,7 +13,7 @@ interface BenefitsSectionProps {
 const BenefitsSection = ({ benefits }: BenefitsSectionProps) => {
   return (
     <section className="py-12 bg-white border-b">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 lg:px-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {benefits.map((benefit, index) => (
             <div key={index} className="flex items-center gap-4">
