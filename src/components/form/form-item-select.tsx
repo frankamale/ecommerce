@@ -67,7 +67,7 @@ const FormItemSelect = ({
                 <SelectValue placeholder={placeholder || "Select a value"} />
               </SelectTrigger>
             </FormControl>
-            <SelectContent className="w-">
+            <SelectContent className="w-full bg-white">
               {options.map(({ value, label }, index) => (
                 <SelectItem value={value} key={index}>
                   {label}
@@ -211,7 +211,7 @@ export function MultiSelect({
           <Check className="ml-2 h-4 w-4 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0">
+      <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0 ">
         <Command>
           <CommandInput
             placeholder={placeholder}

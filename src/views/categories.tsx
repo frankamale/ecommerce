@@ -7,7 +7,6 @@ import { ArrowRight } from 'lucide-react';
 import { getFeaturedProducts, categories as allCategories, products as allProducts } from '../data/products';
 
 const Categories = () => {
-  // Get categories from data file with product counts
   const categories = allCategories.map(cat => ({
     name: cat.name,
     image: cat.image,
@@ -16,7 +15,6 @@ const Categories = () => {
     description: cat.description
   }));
 
-  // Get featured products from data file
   const featuredProducts = getFeaturedProducts().slice(0, 4).map(p => ({
     id: p.id,
     name: p.name,
@@ -36,7 +34,7 @@ const Categories = () => {
       <NavBar />
 
       {/* Breadcrumb */}
-      <div className="bg-white border-b">
+      <div className="bg-white border-b px-4 md:px-10 lg:px-20">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center gap-2 text-sm text-gray-600">
             <Link to="/" className="hover:text-blue-600">Home</Link>
@@ -46,18 +44,9 @@ const Categories = () => {
         </div>
       </div>
 
-      {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-12">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-4">Shop by Category</h1>
-          <p className="text-xl text-blue-100">
-            Browse through our wide range of product categories
-          </p>
-        </div>
-      </div>
-
+   
       {/* Categories Grid */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-12 px-4 md:px-10 lg:px-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category, index) => (
             <CategoryCard
@@ -73,7 +62,7 @@ const Categories = () => {
       </div>
 
       {/* Featured Products Section */}
-      <div className="bg-white py-12">
+      <div className="bg-white py-12 px-4 md:px-10 lg:px-20">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-8">
             <div>
