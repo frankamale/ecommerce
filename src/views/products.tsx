@@ -1,18 +1,10 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavBar from '../components/nav-bar';
 import Footer from '../components/footer';
-import {
-  Star,
-  Filter,
-  ChevronDown,
-  Grid,
-  List,
-  Heart,
-  ShoppingCart,
-  SlidersHorizontal
-} from 'lucide-react';
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import ProductCard from '../components/product-card';
+import SidebarFilter from '../components/sidebar-filter';
+import ProductToolbar from '../components/product-toolbar';
 
 interface Product {
   id: number;
@@ -160,152 +152,25 @@ const Products = () => {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar Filters */}
           <aside className={`lg:w-64 ${showFilters ? 'block' : 'hidden lg:block'}`}>
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-24">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                  <Filter size={20} /> Filters
-                </h2>
-                <button
-                  onClick={() => setShowFilters(!showFilters)}
-                  className="lg:hidden"
-                >
-                  <ChevronDown size={20} />
-                </button>
-              </div>
-
-              {/* Categories */}
-              <div className="mb-6">
-                <h3 className="font-semibold text-gray-900 mb-3">Categories</h3>
-                <div className="space-y-2">
-                  {categories.map(category => (
-                    <button
-                      key={category.id}
-                      onClick={() => setSelectedCategory(category.id)}
-                      className={`w-full text-left px-3 py-2 rounded-lg transition ${selectedCategory === category.id
-                          ? 'bg-blue-600 text-white'
-                          : 'hover:bg-gray-100 text-gray-700'
-                        }`}
-                    >
-                      <div className="flex justify-between items-center">
-                        <span>{category.name}</span>
-                        <span className="text-sm">({category.count})</span>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Price Range */}
-              <div className="mb-6">
-                <h3 className="font-semibold text-gray-900 mb-3">Price Range</h3>
-                <div className="space-y-2">
-                  <input
-                    type="range"
-                    min="0"
-                    max="1000000"
-                    step="50000"
-                    value={priceRange[1]}
-                    onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
-                    className="w-full"
-                  />
-                  <div className="flex justify-between text-sm text-gray-600">
-                    <span>UGX 0</span>
-                    <span>UGX {priceRange[1].toLocaleString()}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Rating Filter */}
-              <div className="mb-6">
-                <h3 className="font-semibold text-gray-900 mb-3">Rating</h3>
-                <div className="space-y-2">
-                  {[4, 3, 2, 1].map(rating => (
-                    <button
-                      key={rating}
-                      className="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 transition flex items-center gap-2"
-                    >
-                      <div className="flex">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            size={16}
-                            className={i < rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}
-                          />
-                        ))}
-                      </div>
-                      <span className="text-sm text-gray-600">& Up</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Availability */}
-              <div className="mb-6">
-                <h3 className="font-semibold text-gray-900 mb-3">Availability</h3>
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" className="w-4 h-4" />
-                  <span className="text-gray-700">In Stock Only</span>
-                </label>
-              </div>
-
-              <button className="w-full bg-gray-900 text-white py-2 rounded-lg hover:bg-gray-800 transition">
-                Reset Filters
-              </button>
-            </div>
+            <SidebarFilter
+              priceRange={priceRange}
+              setPriceRange={setPriceRange}
+              selectedSubCategory={selectedCategory}
+              setSelectedSubCategory={setSelectedCategory}
+              subCategories={categories}
+            />
           </aside>
 
           {/* Main Content */}
           <div className="flex-1">
-            {/* Toolbar */}
-            <div className="bg-white rounded-lg shadow-md p-4 mb-6">
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div className="flex items-center gap-4">
-                  <button
-                    onClick={() => setShowFilters(!showFilters)}
-                    className="lg:hidden flex items-center gap-2 px-4 py-2 border rounded-lg hover:bg-gray-50"
-                  >
-                    <SlidersHorizontal size={20} />
-                    Filters
-                  </button>
-                  <p className="text-gray-600">
-                    Showing <span className="font-semibold">{filteredProducts.length}</span> products
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  {/* Sort Dropdown */}
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                    className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  >
-                    <option value="featured">Featured</option>
-                    <option value="price-low">Price: Low to High</option>
-                    <option value="price-high">Price: High to Low</option>
-                    <option value="rating">Highest Rated</option>
-                    <option value="newest">Newest</option>
-                  </select>
-
-                  {/* View Toggle */}
-                  <div className="flex border rounded-lg overflow-hidden">
-                    <Button
-                      variant={"normal"}
-                      size={"normal"}
-                      onClick={() => setViewMode('grid')}
-                      className={`p-2 ${viewMode === 'grid' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
-                    >
-                      <Grid size={20} />
-                    </Button>
-                    <button
-                      onClick={() => setViewMode('list')}
-                      className={`p-2 ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
-                    >
-                      <List size={20} />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ProductToolbar
+              viewMode={viewMode}
+              setViewMode={setViewMode}
+              sortBy={sortBy}
+              setSortBy={setSortBy}
+              productCount={filteredProducts.length}
+              onToggleFilters={() => setShowFilters(!showFilters)}
+            />
 
             {/* Products Grid */}
             <div className={viewMode === 'grid'
@@ -313,88 +178,7 @@ const Products = () => {
               : 'grid grid-cols-1 lg:grid-cols-2 gap-4'
             }>
               {filteredProducts.map(product => (
-                <div
-                  key={product.id}
-                  className={`bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow overflow-hidden group ${viewMode === 'list' ? 'flex' : ''
-                    }`}
-                >
-                  <div className={`relative overflow-hidden ${viewMode === 'list' ? 'w-48' : ''}`}>
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className={`w-full object-cover group-hover:scale-105 transition-transform duration-300 ${viewMode === 'list' ? 'h-full' : 'h-64'
-                        }`}
-                    />
-                    {product.discount && (
-                      <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-semibold">
-                        -{product.discount}%
-                      </div>
-                    )}
-                    {product.isNew && (
-                      <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded text-xs font-semibold">
-                        NEW
-                      </div>
-                    )}
-                    {!product.inStock && (
-                      <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                        <span className="bg-white text-gray-900 px-4 py-2 rounded-lg font-semibold">
-                          Out of Stock
-                        </span>
-                      </div>
-                    )}
-                    <Button className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md hover:bg-red-50 transition opacity-0 group-hover:opacity-100" 
-                    size={"normal"}
-                    variant={"normal"}
-                    >
-                      
-                      <Heart size={18} className="text-gray-700" />
-                    </Button>
-                  </div>
-
-                  <div className={`p-4 ${viewMode === 'list' ? 'flex-1' : ''}`}>
-                    <Link to={`/products/${product.id}`}>
-                      <h3 className="font-semibold text-gray-900 mb-2 hover:text-blue-600 transition">
-                        {product.name}
-                      </h3>
-                    </Link>
-                    <div className="flex items-center gap-1 mb-2">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          size={16}
-                          className={i < Math.floor(product.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}
-                        />
-                      ))}
-                      <span className="text-sm text-gray-600 ml-1">({product.reviews})</span>
-                    </div>
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-2xl font-bold text-blue-600">
-                        UGX {product.price.toLocaleString()}
-                      </span>
-                      {product.originalPrice && (
-                        <span className="text-gray-400 line-through text-sm">
-                          UGX {product.originalPrice.toLocaleString()}
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex gap-2">
-                      <Link
-                        to={`/products/${product.id}`}
-                        className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition text-center text-sm font-medium"
-                      >
-                        View Details
-                      </Link>
-                      <Button
-                      variant={"normal"}
-                      size={"normal"}
-                        disabled={!product.inStock}
-                        className="bg-gray-900 text-white p-2 rounded-lg hover:bg-gray-800 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
-                      >
-                        <ShoppingCart size={18} />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
+                <ProductCard key={product.id} {...product} />
               ))}
             </div>
 
