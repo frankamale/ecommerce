@@ -151,8 +151,8 @@ const Footer = () => {
               <li className="flex items-start gap-2">
                 <MapPin size={20} className="mt-1 flex-shrink-0 text-blue-500" />
                 <span>
-                  Plot 123, Kampala Road<br />
-                  Kampala, Uganda
+                  Nvuma Shoppers, Kitooro Road<br />
+                  Entebbe, Uganda
                 </span>
               </li>
               <li className="flex items-center gap-2">
@@ -176,8 +176,8 @@ const Footer = () => {
               <li className="flex items-start gap-2">
                 <Clock size={20} className="mt-1 flex-shrink-0 text-blue-500" />
                 <span>
-                  Mon - Sat: 8:00 AM - 8:00 PM<br />
-                  Sunday: 10:00 AM - 6:00 PM
+                  Mon - Sat: 8:00 AM - 10:00 PM<br />
+                  Sunday: 9:00 AM - 10:00 PM
                 </span>
               </li>
             </ul>
