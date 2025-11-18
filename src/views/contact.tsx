@@ -34,20 +34,14 @@ const Contact = () => {
   const googleMapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
 
   const onSubmit = (data: ContactFormData) => {
-    // Handle form submission
     console.log('Form submitted:', data);
-    // Here you can add API call to send the contact form data
-    // After successful submission, you can show a success message or reset the form
     form.reset();
   };
-
-
-
   const contactInfo = [
     {
       icon: MapPin,
       title: 'Our Location',
-      details: ['Plot 123, Kampala Road', 'Kampala, Uganda'],
+      details: ['Nvuma Shoppers, Kitooro Road, Entebbe, Uganda'],
       color: 'text-blue-600'
     },
     {
@@ -65,7 +59,7 @@ const Contact = () => {
     {
       icon: Clock,
       title: 'Working Hours',
-      details: ['Mon - Fri: 8:00 AM - 6:00 PM', 'Sat - Sun: 9:00 AM - 4:00 PM'],
+      details: ['Mon - Fri: 8:00 AM - 10:00 PM', 'Sat - Sun: 9:00 AM - 10:00 PM'],
       color: 'text-purple-600'
     }
   ];
@@ -197,7 +191,7 @@ const Contact = () => {
               <div className="p-4 bg-gray-50 border-t">
                 <p className="text-sm text-gray-700 mb-2 flex items-center gap-2">
                   <MapPin size={16} className="text-blue-600" />
-                  Plot 123, Kampala Road, Kampala, Uganda
+                  Nvuma Shoppers, Kitooro Road, Entebbe, Uganda
                 </p>
                 <a
                   href={googleMapsUrl}
