@@ -8,6 +8,12 @@ import { Form } from '@/components/ui/form';
 import FormItemInput from '@/components/form/form-item-input';
 import FormItemTextarea from '@/components/form/form-item-textarea';
 import FormItemSelect from '@/components/form/form-item-select';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 interface ContactFormData {
   name: string;
@@ -207,26 +213,61 @@ const Contact = () => {
             {/* FAQ Section */}
             <div className="bg-white rounded-lg shadow-md p-6">
               <h3 className="text-xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h3>
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">What are your delivery areas?</h4>
-                  <p className="text-sm text-gray-600">
-                    We deliver nationwide across Uganda, including Kampala, Entebbe, Mbarara, Gulu, and other major cities.
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">What payment methods do you accept?</h4>
-                  <p className="text-sm text-gray-600">
-                    We accept MTN Mobile Money, Airtel Money, Visa, Mastercard, and cash on delivery.
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-1">How long does delivery take?</h4>
-                  <p className="text-sm text-gray-600">
-                    Delivery within Kampala takes 1-2 days. Other regions may take 3-5 business days.
-                  </p>
-                </div>
-              </div>
+              <Accordion type="single" collapsible className="w-full">
+                <AccordionItem value="item-1">
+                  <AccordionTrigger className="text-left font-semibold text-gray-900">
+                    What are your delivery areas?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-gray-600">
+                    We deliver nationwide across Uganda, including Kampala, Entebbe, Mbarara, Gulu, and other major cities. Our delivery network covers all regions of the country.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-2">
+                  <AccordionTrigger className="text-left font-semibold text-gray-900">
+                    What payment methods do you accept?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-gray-600">
+                    We accept MTN Mobile Money, Airtel Money, Visa, Mastercard, and cash on delivery. All transactions are secure and encrypted.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-3">
+                  <AccordionTrigger className="text-left font-semibold text-gray-900">
+                    How long does delivery take?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-gray-600">
+                    Delivery within Kampala takes 1-2 days. Other regions may take 3-5 business days depending on the location.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-4">
+                  <AccordionTrigger className="text-left font-semibold text-gray-900">
+                    What is your return policy?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-gray-600">
+                    We offer a 30-day return policy for most items. Products must be in their original condition with tags attached. Contact our support team to initiate a return.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-5">
+                  <AccordionTrigger className="text-left font-semibold text-gray-900">
+                    How do I track my order?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-gray-600">
+                    Once your order is shipped, you'll receive a tracking number via email and SMS. You can use this number to track your order in real-time through your account dashboard.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="item-6">
+                  <AccordionTrigger className="text-left font-semibold text-gray-900">
+                    Do you offer warranty on products?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-gray-600">
+                    Yes, all electronics and appliances come with manufacturer warranty. The warranty period varies by product and is clearly stated on each product page.
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             </div>
           </div>
         </div>
