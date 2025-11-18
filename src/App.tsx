@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import ProductRoutes from './routes/products.routes'
 import GuestRoutes from './routes/guest.routes'
+import AdminRoutes from './routes/admin.routes'
 import { CartProvider } from './context/cart-context'
 import { WishlistProvider } from './context/wishlist-context'
 
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/*" element={<GuestRoutes />} />
           <Route path="/products/*" element={<ProductRoutes />} />
+          <Route path="/admin/*" element={<AdminRoutes />} />
         </Routes>
       </WishlistProvider>
     </CartProvider>
