@@ -24,7 +24,6 @@ const Orders = () => {
     { id: 'ORD-008', customer: 'Wasswa Mark', email: 'wasswa@email.com', total: 145000, items: 3, status: 'Processing', date: '2024-01-12', payment: 'Mobile Money' },
   ];
 
-  // Filter orders
   const filteredOrders = orders.filter(order => {
     const matchesSearch =
       order.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
