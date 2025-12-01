@@ -1,5 +1,5 @@
-import {  Filter } from 'lucide-react';
-import { Button } from './ui/button';
+import { Filter } from "lucide-react";
+import { Button } from "./ui/button";
 
 interface SidebarFilterProps {
   priceRange: number[];
@@ -14,10 +14,10 @@ const SidebarFilter = ({
   setPriceRange,
   selectedSubCategory,
   setSelectedSubCategory,
-  subCategories
+  subCategories,
 }: SidebarFilterProps) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 sticky top-24">
+    <div className="bg-white rounded-lg shadow-md py-6 px-3 sticky top-24">
       <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2 mb-6">
         <Filter size={20} /> Filters
       </h2>
@@ -28,28 +28,28 @@ const SidebarFilter = ({
           <h3 className="font-semibold text-gray-900 mb-3">Sub Categories</h3>
           <div className="space-y-2">
             <Button
-            variant={"normal"}
-              onClick={() => setSelectedSubCategory?.('all')}
-              className={`w-full text-left px-3 py-2 rounded-lg transition ${
-                selectedSubCategory === 'all'
-                  ? 'bg-blue-600 text-white'
-                  : 'hover:bg-gray-100 text-gray-700'
+              variant={"normal"}
+              onClick={() => setSelectedSubCategory?.("all")}
+              className={`w-full block text-left px-3 py-2 rounded-lg transition ${
+                selectedSubCategory === "all"
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-gray-100 text-gray-700"
               }`}
             >
               All
             </Button>
             {subCategories.map((subCat) => (
               <Button
-              variant={"normal"}
+                variant={"normal"}
                 key={subCat.id}
                 onClick={() => setSelectedSubCategory?.(subCat.id)}
-                className={`w-full text-left px-3 py-2 rounded-lg transition ${
+                className={`w-full block text-left px-3 py-2 rounded-lg transition ${
                   selectedSubCategory === subCat.id
-                    ? 'bg-blue-600 text-white'
-                    : 'hover:bg-gray-100 text-gray-700'
+                    ? "bg-blue-600 text-white"
+                    : "hover:bg-gray-100 text-gray-700"
                 }`}
               >
-                <div className="flex justify-between items-center">
+                <div className="flex gap-1 items-center">
                   <span>{subCat.name}</span>
                   <span className="text-sm">({subCat.count})</span>
                 </div>
@@ -78,8 +78,6 @@ const SidebarFilter = ({
           </div>
         </div>
       </div>
-
-     
 
       {/* Availability */}
       <div className="mb-6">

@@ -54,8 +54,8 @@ const NavBar = () => {
       }`}
     >
       {/* Main Navigation */}
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between gap-4 lg:px-10">
+      <div className="container px-4 mx-auto py-4">
+        <div className="flex items-center justify-between gap-4">
           {/* Logo */}
           <Link
             to="/"
@@ -149,36 +149,31 @@ const NavBar = () => {
       </div>
 
       {/* Desktop Navigation Links */}
-      <div className="hidden md:flex items-center justify-center bg-gray-900 text-white w-full ">
-        <Link
-          to="/"
-          className="hover:text-blue-400 font-medium transition mr-2"
-        >
-          Home
-        </Link>
+      <div className="hidden md:block bg-gray-900 text-white w-full ">
+        <div className="px-4 container  mx-auto flex items-center">
+          <AllCategories items={categories} />
+          <NavItem items={categories} />
 
-        <AllCategories items={categories} />
-        <NavItem items={categories} />
-
-        <div className="flex items-center gap-6 ml-2">
-          <Link
-            to="/deals"
-            className="text-red-400 hover:text-red-300 font-medium transition flex items-center gap-1"
-          >
-            <Flame size={18} /> Deals
-          </Link>
-          <Link
-            to="/new-arrivals"
-            className="hover:text-blue-400 font-medium transition"
-          >
-            New Arrivals
-          </Link>
-          <Link
-            to="/contact"
-            className="hover:text-blue-400 font-medium transition"
-          >
-            Contact
-          </Link>
+          <div className="flex items-center gap-6 ml-2">
+            <Link
+              to="/deals"
+              className="text-red-400 hover:text-red-300 font-medium transition flex items-center gap-1"
+            >
+              <Flame size={18} /> Deals
+            </Link>
+            <Link
+              to="/new-arrivals"
+              className="hover:text-blue-400 font-medium transition"
+            >
+              New Arrivals
+            </Link>
+            <Link
+              to="/contact"
+              className="hover:text-blue-400 font-medium transition"
+            >
+              Contact
+            </Link>
+          </div>
         </div>
       </div>
 

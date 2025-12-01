@@ -1,5 +1,4 @@
-import { Link, useParams, Navigate } from "react-router-dom";
-import NavBar from "../components/nav-bar";
+import { Link, Navigate, useParams } from "react-router-dom";
 import Footer from "../components/footer";
 import ProductImageGallery from "../components/product-image-gallery";
 import ProductInfo from "../components/product-info";
@@ -40,9 +39,7 @@ const ProductDetails = () => {
     }));
 
   return (
-    <div className="min-h-screen bg-gray-50 ">
-      <NavBar />
-
+    <>
       {/* Breadcrumb */}
       <div className="bg-white border-b">
         <div className="container mx-auto px-4 py-4">
@@ -106,7 +103,7 @@ const ProductDetails = () => {
       </div>
 
       <Footer />
-    </div>
+    </>
   );
 };
 
