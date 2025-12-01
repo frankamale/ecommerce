@@ -11,15 +11,15 @@ export const NavItem = ({ items }: { items: Category[] }) => {
             {item.name} {item.subCategories && <FaCaretDown />}
           </div>
           {item.subCategories && (
-            <div className="absolute hidden group-hover:block bg-white left-0 top-full min-w-full w-fit">
+            <div className="absolute shadow-sm hidden group-hover:block bg-white left-0 top-full min-w-full w-fit">
               <ul>
                 {item.subCategories.map((item) => (
                   <Link
                     key={item.slug}
                     to={`/categories/${item.slug}`}
-                    className="block text-sm text-black border-b border-b-1 last:border-b-0 hover:bg-blue-500 hover:text-white"
+                    className="block text-black border-b border-b-1 last:border-b-0 hover:bg-blue-500 hover:text-white"
                   >
-                    <li className=" py-1 px-2 text-nowrap">{item.name}</li>
+                    <li className=" p-2 text-nowrap">{item.name}</li>
                   </Link>
                 ))}
               </ul>
@@ -40,7 +40,7 @@ export const AllCategories = ({ items }: { items: Category[] }) => {
       >
         All Products <FaCaretDown />
       </Link>
-      <div className="absolute hidden group-hover/outer:flex left-0 top-full flex-col bg-white">
+      <div className="absolute hidden shadow-sm group-hover/outer:flex left-0 top-full flex-col bg-white">
         {items.map((item) => (
           <div
             key={item.id}

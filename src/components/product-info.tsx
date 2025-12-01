@@ -1,6 +1,6 @@
-import { Star, Heart, Share2, ShoppingCart, Truck, Shield } from 'lucide-react';
-import { Button } from './ui/button';
-import { useState } from 'react';
+import { Star, Heart, Share2, ShoppingCart, Truck, Shield } from "lucide-react";
+import { Button } from "./ui/button";
+import { useState } from "react";
 
 interface ProductInfoProps {
   name: string;
@@ -23,13 +23,15 @@ const ProductInfo = ({
   inStock,
   description,
   category,
-  brand
+  brand,
 }: ProductInfoProps) => {
   const [quantity, setQuantity] = useState(1);
-  const discount = originalPrice ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0;
+  const discount = originalPrice
+    ? Math.round(((originalPrice - price) / originalPrice) * 100)
+    : 0;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       {/* Category and Brand */}
       <div className="flex items-center gap-2 text-sm text-gray-600">
         <span className="capitalize">{category}</span>
@@ -53,8 +55,8 @@ const ProductInfo = ({
               size={20}
               className={
                 i < Math.floor(rating)
-                  ? 'fill-yellow-400 text-yellow-400'
-                  : 'text-gray-300'
+                  ? "fill-yellow-400 text-yellow-400"
+                  : "text-gray-300"
               }
             />
           ))}
@@ -66,15 +68,15 @@ const ProductInfo = ({
 
       {/* Price */}
       <div className="flex items-center gap-4">
-        <span className="text-xl md:text-4xl font-bold text-blue-600">
+        <span className="text-xl md:text-2xl font-bold text-blue-600">
           UGX {price.toLocaleString()}
         </span>
         {originalPrice && (
           <>
-            <span className="text-sm md:text-2xl text-gray-400 line-through">
+            <span className="text-sm md:text-lg text-gray-400 line-through">
               UGX {originalPrice.toLocaleString()}
             </span>
-            <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+            <span className="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
               Save {discount}%
             </span>
           </>
@@ -97,7 +99,7 @@ const ProductInfo = ({
       </div>
 
       {/* Description */}
-      <div className="border-t pt-6">
+      <div className="border-t pt-4">
         <h3 className="font-semibold text-gray-900 mb-2">Description</h3>
         <p className="text-gray-600 leading-relaxed">{description}</p>
       </div>

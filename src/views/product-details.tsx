@@ -1,15 +1,19 @@
-import { Link, useParams, Navigate } from 'react-router-dom';
-import NavBar from '../components/nav-bar';
-import Footer from '../components/footer';
-import ProductImageGallery from '../components/product-image-gallery';
-import ProductInfo from '../components/product-info';
-import ProductReviews from '../components/product-reviews';
-import RelatedProductsSection from '../components/related-products-section';
-import { getProductById, getProductsByCategory, getReviewsByProductId } from '../data/products';
+import { Link, useParams, Navigate } from "react-router-dom";
+import NavBar from "../components/nav-bar";
+import Footer from "../components/footer";
+import ProductImageGallery from "../components/product-image-gallery";
+import ProductInfo from "../components/product-info";
+import ProductReviews from "../components/product-reviews";
+import RelatedProductsSection from "../components/related-products-section";
+import {
+  getProductById,
+  getProductsByCategory,
+  getReviewsByProductId,
+} from "../data/products";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const productId = parseInt(id || '1');
+  const productId = parseInt(id || "1");
 
   const product = getProductById(productId);
 
@@ -20,9 +24,9 @@ const ProductDetails = () => {
   const customerReviews = getReviewsByProductId(productId);
 
   const relatedProducts = getProductsByCategory(product.category)
-    .filter(p => p.id !== productId)
+    .filter((p) => p.id !== productId)
     .slice(0, 4)
-    .map(p => ({
+    .map((p) => ({
       id: p.id,
       name: p.name,
       price: p.price,
@@ -32,7 +36,7 @@ const ProductDetails = () => {
       image: p.images[0],
       inStock: p.inStock,
       isNew: p.isNew,
-      discount: p.discount
+      discount: p.discount,
     }));
 
   return (
@@ -64,10 +68,13 @@ const ProductDetails = () => {
       </div>
 
       {/* Product Details Section */}
-      <div className="container mx-auto px-4 py-8 lg:px-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+      <div className="container mx-auto px-4 py-8 ">
+        <div className="flex gap-6 max-sm:flex-col mb-16">
           {/* Product Images */}
-          <ProductImageGallery images={product.images} productName={product.name} />
+          <ProductImageGallery
+            images={product.images}
+            productName={product.name}
+          />
 
           {/* Product Info */}
           <ProductInfo
