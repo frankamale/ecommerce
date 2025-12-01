@@ -1,24 +1,24 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import {
-  Search,
-  ShoppingCart,
+  Flame,
   Heart,
-  User,
   Menu,
-  X,
-
+  Search,
   ShoppingBag,
-  Flame
-} from 'lucide-react';
-import { Button } from './ui/button';
-import { categories } from '../data/products';
-import { useCart } from '../context/cart-context';
-import { useWishlist } from '../context/wishlist-context';
+  ShoppingCart,
+  User,
+  X,
+} from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useCart } from "../context/cart-context";
+import { useWishlist } from "../context/wishlist-context";
+import { categories } from "../data/products";
+import { NavItem, AllCategories } from "./nav-item";
+import { Button } from "./ui/button";
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const { getCartCount } = useCart();
@@ -37,10 +37,10 @@ const NavBar = () => {
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [lastScrollY]);
 
@@ -48,14 +48,19 @@ const NavBar = () => {
   const wishlistItemCount = getWishlistCount();
 
   return (
-    <nav className={`w-full bg-white shadow-md sticky top-0 z-50 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
-
-
+    <nav
+      className={`w-full bg-white shadow-md sticky top-0 z-50 transition-transform duration-300 ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       {/* Main Navigation */}
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between gap-4 lg:px-10">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 text-2xl font-bold text-gray-900">
+          <Link
+            to="/"
+            className="flex items-center gap-2 text-2xl font-bold text-gray-900"
+          >
             <ShoppingBag size={32} className="text-blue-600" />
             <span>Nvuma Shoppers</span>
           </Link>
@@ -79,7 +84,10 @@ const NavBar = () => {
           {/* Navigation Icons */}
           <div className="flex items-center gap-6">
             {/* Wishlist */}
-            <Link to="/wishlist" className="relative hover:text-blue-600 transition">
+            <Link
+              to="/wishlist"
+              className="relative hover:text-blue-600 transition"
+            >
               <Heart size={24} />
               {wishlistItemCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -89,7 +97,10 @@ const NavBar = () => {
             </Link>
 
             {/* Cart */}
-            <Link to="/cart" className="relative hover:text-blue-600 transition">
+            <Link
+              to="/cart"
+              className="relative hover:text-blue-600 transition"
+            >
               <ShoppingCart size={24} />
               {cartItemCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -99,7 +110,10 @@ const NavBar = () => {
             </Link>
 
             {/* User Account */}
-            <Link to="/account" className="hidden md:flex items-center gap-2 hover:text-blue-600 transition">
+            <Link
+              to="/account"
+              className="hidden md:flex items-center gap-2 hover:text-blue-600 transition"
+            >
               <User size={24} />
               <div className="text-sm">
                 <div className="text-gray-500">Hello, User</div>
@@ -135,66 +149,83 @@ const NavBar = () => {
       </div>
 
       {/* Desktop Navigation Links */}
-      <div className="hidden md:flex items-center justify-center gap-8 py-4 bg-gray-900 text-white w-full border-t border-gray-800">
-        <Link to="/" className="hover:text-blue-400 font-medium transition">
+      <div className="hidden md:flex items-center justify-center bg-gray-900 text-white w-full ">
+        <Link
+          to="/"
+          className="hover:text-blue-400 font-medium transition mr-2"
+        >
           Home
         </Link>
-        <Link to="/products" className="hover:text-blue-400 font-medium transition">
-          All Products
-        </Link>
-        <div className="relative group">
-          <Link to="/categories" className="hover:text-blue-400 font-medium transition">
-            Categories ▾
+
+        <AllCategories items={categories} />
+        <NavItem items={categories} />
+
+        <div className="flex items-center gap-6 ml-2">
+          <Link
+            to="/deals"
+            className="text-red-400 hover:text-red-300 font-medium transition flex items-center gap-1"
+          >
+            <Flame size={18} /> Deals
           </Link>
-          {/* Dropdown Menu - Added padding-top to bridge the gap */}
-          <div className="absolute left-0 pt-2 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200">
-            <div className="bg-white shadow-lg rounded-lg py-2 min-w-[200px]">
-              {categories.map((category) => (
-                <Link
-                  key={category.slug}
-                  to={`/categories/${category.slug}`}
-                  className="block px-4 py-2 hover:bg-gray-100 text-gray-900"
-                >
-                  {category.name}
-                </Link>
-              ))}
-            </div>
-          </div>
+          <Link
+            to="/new-arrivals"
+            className="hover:text-blue-400 font-medium transition"
+          >
+            New Arrivals
+          </Link>
+          <Link
+            to="/contact"
+            className="hover:text-blue-400 font-medium transition"
+          >
+            Contact
+          </Link>
         </div>
-        <Link to="/deals" className="text-red-400 hover:text-red-300 font-medium transition flex items-center gap-1">
-          <Flame size={18} /> Deals
-        </Link>
-        <Link to="/new-arrivals" className="hover:text-blue-400 font-medium transition">
-          New Arrivals
-        </Link>
-        <Link to="/contact" className="hover:text-blue-400 font-medium transition">
-          Contact
-        </Link>
       </div>
 
       {/* Mobile Menu */}
       <div className="container mx-auto px-4">
         {isMenuOpen && (
           <div className="md:hidden mt-4 pt-4 border-t border-gray-200 space-y-3">
-            <Link to="/" className="block text-gray-700 hover:text-blue-600 font-medium py-2">
+            <Link
+              to="/"
+              className="block text-gray-700 hover:text-blue-600 font-medium py-2"
+            >
               Home
             </Link>
-            <Link to="/products" className="block text-gray-700 hover:text-blue-600 font-medium py-2">
+            <Link
+              to="/products"
+              className="block text-gray-700 hover:text-blue-600 font-medium py-2"
+            >
               All Products
             </Link>
-            <Link to="/categories" className="block text-gray-700 hover:text-blue-600 font-medium py-2">
+            <Link
+              to="/categories"
+              className="block text-gray-700 hover:text-blue-600 font-medium py-2"
+            >
               Categories
             </Link>
-            <Link to="/deals" className=" text-red-600 hover:text-red-700 font-medium py-2 flex items-center gap-2">
+            <Link
+              to="/deals"
+              className=" text-red-600 hover:text-red-700 font-medium py-2 flex items-center gap-2"
+            >
               <Flame size={18} /> Deals
             </Link>
-            <Link to="/new-arrivals" className="block text-gray-700 hover:text-blue-600 font-medium py-2">
+            <Link
+              to="/new-arrivals"
+              className="block text-gray-700 hover:text-blue-600 font-medium py-2"
+            >
               New Arrivals
             </Link>
-            <Link to="/contact" className="block text-gray-700 hover:text-blue-600 font-medium py-2">
+            <Link
+              to="/contact"
+              className="block text-gray-700 hover:text-blue-600 font-medium py-2"
+            >
               Contact
             </Link>
-            <Link to="/account" className=" text-gray-700 hover:text-blue-600 font-medium py-2 pt-3 border-t flex items-center gap-2">
+            <Link
+              to="/account"
+              className=" text-gray-700 hover:text-blue-600 font-medium py-2 pt-3 border-t flex items-center gap-2"
+            >
               <User size={18} /> My Account
             </Link>
           </div>
