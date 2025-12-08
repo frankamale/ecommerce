@@ -154,26 +154,12 @@ const NavBar = () => {
           <AllCategories items={categories} />
           <NavItem items={categories} />
 
-          <div className="flex items-center gap-6 ml-2">
-            <Link
-              to="/deals"
-              className="text-red-400 hover:text-red-300 font-medium transition flex items-center gap-1"
-            >
-              <Flame size={18} /> Deals
-            </Link>
-            <Link
-              to="/new-arrivals"
-              className="hover:text-blue-400 font-medium transition"
-            >
-              New Arrivals
-            </Link>
-            <Link
-              to="/contact"
-              className="hover:text-blue-400 font-medium transition"
-            >
-              Contact
-            </Link>
-          </div>
+          <Link
+            to="/contact"
+            className="hover:text-blue-400 ml-2 font-medium transition"
+          >
+            Contact
+          </Link>
         </div>
       </div>
 

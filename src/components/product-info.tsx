@@ -1,6 +1,8 @@
 import { Star, Heart, Share2, ShoppingCart, Truck, Shield } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState } from "react";
+import { Badge } from "./ui/badge";
+import { cn } from "@/lib/utils";
 
 interface ProductInfoProps {
   name: string;
@@ -26,9 +28,8 @@ const ProductInfo = ({
   brand,
 }: ProductInfoProps) => {
   const [quantity, setQuantity] = useState(1);
-  const discount = originalPrice
-    ? Math.round(((originalPrice - price) / originalPrice) * 100)
-    : 0;
+  console.log(originalPrice);
+  const [selectedOption, setSelectedOption] = useState("carton");
 
   return (
     <div className="space-y-3">
@@ -67,35 +68,48 @@ const ProductInfo = ({
       </div>
 
       {/* Price */}
-      <div className="flex items-center gap-4">
-        <span className="text-xl md:text-2xl font-bold text-blue-600">
-          UGX {price.toLocaleString()}
-        </span>
-        {originalPrice && (
-          <>
-            <span className="text-sm md:text-lg text-gray-400 line-through">
-              UGX {originalPrice.toLocaleString()}
-            </span>
-            <span className="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-              Save {discount}%
-            </span>
-          </>
-        )}
-      </div>
-
-      {/* Stock Status */}
-      <div>
-        {inStock ? (
-          <span className="text-green-600 font-semibold flex items-center gap-2">
-            <span className="w-2 h-2 bg-green-600 rounded-full"></span>
-            In Stock
-          </span>
-        ) : (
-          <span className="text-red-600 font-semibold flex items-center gap-2">
-            <span className="w-2 h-2 bg-red-600 rounded-full"></span>
-            Out of Stock
-          </span>
-        )}
+      <div className="grid grid-cols-4 items-center gap-4">
+        <div
+          onClick={() => setSelectedOption("pc")}
+          className={cn(
+            selectedOption == "pc"
+              ? "bg-blue-500 border-black  text-white "
+              : "bg-gray-100 border-gray-300",
+            "relative border hover:border-black hover:bg-blue-500 duration-200 hover:text-white rounded-sm h-full cursor-pointer flex flex-col justify-center items-center  px-3 py-2 text-sm gap-0.5 max-w-[15rem] w-full"
+          )}
+        >
+          <p>pc</p>
+          <p>
+            UGX <span className="font-bold">{price / 12}</span>
+          </p>
+          <Badge
+            variant={"success"}
+            className="absolute -top-2.5 text-[0.6rem] right-0"
+          >
+            IN STOCK
+          </Badge>
+        </div>
+        <div
+          onClick={() => setSelectedOption("carton")}
+          className={cn(
+            selectedOption == "carton"
+              ? "bg-blue-500 border-black  text-white "
+              : "bg-gray-100 border-gray-300",
+            "relative border hover:border-black hover:bg-blue-500 duration-200 hover:text-white rounded-sm h-full flex cursor-pointer  flex-col justify-center items-center  px-3 py-2 text-sm gap-0.5 max-w-[15rem] w-full"
+          )}
+        >
+          <p className="font-medium">Carton (12 pcs)</p>
+          <p>
+            UGX <span className="font-bold">{price.toLocaleString()}</span>
+          </p>
+          <p>({price / 12}/pc)</p>
+          <Badge
+            variant={"success"}
+            className="absolute -top-2.5 text-[0.6rem] right-0"
+          >
+            IN STOCK
+          </Badge>
+        </div>
       </div>
 
       {/* Description */}
@@ -123,6 +137,10 @@ const ProductInfo = ({
               +
             </button>
           </div>
+          Amount:{" "}
+          {(
+            quantity * (selectedOption == "carton" ? price : price / 12)
+          ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
         </div>
 
         <div className="flex gap-3">
