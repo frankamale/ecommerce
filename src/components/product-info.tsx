@@ -80,7 +80,12 @@ const ProductInfo = ({
         >
           <p>pc</p>
           <p>
-            UGX <span className="font-bold">{price / 12}</span>
+            UGX{" "}
+            <span className="font-bold">
+              {(price / 12).toLocaleString(undefined, {
+                maximumFractionDigits: 0,
+              })}
+            </span>
           </p>
           <Badge
             variant={"success"}
@@ -102,7 +107,13 @@ const ProductInfo = ({
           <p>
             UGX <span className="font-bold">{price.toLocaleString()}</span>
           </p>
-          <p>({price / 12}/pc)</p>
+          <p>
+            (
+            {(price / 12).toLocaleString(undefined, {
+              maximumFractionDigits: 0,
+            })}
+            /pc)
+          </p>
           <Badge
             variant={"success"}
             className="absolute -top-2.5 text-[0.6rem] right-0"
@@ -140,7 +151,7 @@ const ProductInfo = ({
           Amount:{" "}
           {(
             quantity * (selectedOption == "carton" ? price : price / 12)
-          ).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+          ).toLocaleString(undefined, { maximumFractionDigits: 0 })}
         </div>
 
         <div className="flex gap-3">
