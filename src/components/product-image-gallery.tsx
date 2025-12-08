@@ -67,7 +67,7 @@ const ProductImageGallery = ({
         </div>
 
         {/* Thumbnail Images */}
-        <div className="flex items-center relative max-w-[32rem] overflow-x-scroll mt-2">
+        <div className="flex items-center relative max-w-[32rem] overflow-x-scroll mt-2 gap-2">
           {images.map((image, index) => (
             <button
               key={index}

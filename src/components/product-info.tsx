@@ -75,7 +75,7 @@ const ProductInfo = ({
             selectedOption == "pc"
               ? "bg-blue-500 border-black  text-white "
               : "bg-gray-100 border-gray-300",
-            "relative border hover:border-black hover:bg-blue-500 duration-200 hover:text-white rounded-sm h-full cursor-pointer flex flex-col justify-center items-center  px-3 py-2 text-sm gap-0.5 max-w-[15rem] w-full"
+            "relative border hover:border-black hover:bg-blue-500 duration-200 hover:text-white rounded-lg h-full cursor-pointer flex flex-col justify-center items-center  px-3 py-2 text-sm gap-0.5 max-w-[15rem] w-full"
           )}
         >
           <p>pc</p>
@@ -100,7 +100,7 @@ const ProductInfo = ({
             selectedOption == "carton"
               ? "bg-blue-500 border-black  text-white "
               : "bg-gray-100 border-gray-300",
-            "relative border hover:border-black hover:bg-blue-500 duration-200 hover:text-white rounded-sm h-full flex cursor-pointer  flex-col justify-center items-center  px-3 py-2 text-sm gap-0.5 max-w-[15rem] w-full"
+            "relative border hover:border-black hover:bg-blue-500 duration-200 hover:text-white rounded-lg h-full flex cursor-pointer  flex-col justify-center items-center  px-3 py-2 text-sm gap-0.5 max-w-[15rem] w-full"
           )}
         >
           <p className="font-medium">Carton (12 pcs)</p>
