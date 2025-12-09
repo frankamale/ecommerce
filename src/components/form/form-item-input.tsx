@@ -20,6 +20,7 @@ interface FormItemInputProps {
   disabled?: boolean;
   onChange?: () => void;
   labelClassName?: string;
+  inputClassName?: string;
 }
 
 export default function FormItemInput({
@@ -32,6 +33,7 @@ export default function FormItemInput({
   showError = true,
   onChange,
   labelClassName = "font-semibold text-foreground",
+  inputClassName,
   ...props
 }: FormItemInputProps) {
   return (
@@ -44,6 +46,7 @@ export default function FormItemInput({
           <FormControl>
             <Input
               {...props}
+              className={inputClassName}
               placeholder={placeholder}
               type={type}
               {...field}
@@ -51,8 +54,7 @@ export default function FormItemInput({
               onChange={(e) => {
                 field.onChange(e);
                 if (onChange) onChange();
-              }
-              }
+              }}
             />
           </FormControl>
           {showError && <FormMessage />}
@@ -78,7 +80,9 @@ export function FormItemInputLine({
       control={form.control}
       name={name}
       render={({ field }) => (
-        <FormItem className={`flex gap-7 items-center justify-between ${className}`}>
+        <FormItem
+          className={`flex gap-7 items-center justify-between ${className}`}
+        >
           {label && <FormLabel className={labelClassName}>{label}:</FormLabel>}
           <FormControl>
             <Input
@@ -91,8 +95,7 @@ export function FormItemInputLine({
               onChange={(e) => {
                 field.onChange(e);
                 if (onChange) onChange();
-              }
-              }
+              }}
             />
           </FormControl>
           {showError && <FormMessage />}
